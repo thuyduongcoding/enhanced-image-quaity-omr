@@ -11,11 +11,15 @@ def upscale_image(input_path, upscale_image_path, denoise_image_path):
 	current_dir = 'C:/Users/nguye/OneDrive/Documents/Braille Sheet App'
 	try:
 		h, w = image.shape
+		
+		# Finding the appropriate scale factor
 		scale = int(np.sqrt(20000000/(h*w)))
 		if scale >= 4:
 			scale = 4
 		else:
 			scale = 2
+
+		# Upscaling
 		vulkan_path = f"{current_dir}/waifu2x-ncnn-vulkan-20220728-windows/waifu2x-ncnn-vulkan-20220728-windows/waifu2x-ncnn-vulkan.exe"
 		command = f"{vulkan_path} -v -i {input_path} -o {upscale_image_path} -n 2 -s {scale} -f png"
 		print('Upscaling...')
@@ -27,6 +31,7 @@ def upscale_image(input_path, upscale_image_path, denoise_image_path):
 		
 		print('Done upscaling')
 		
+		# Denoising
 		command = f"{vulkan_path} -v -i {upscale_image_path} -o {denoise_image_path} -n 2 -s 1 -f png"
 		print('Denoising...')
 		print(command)

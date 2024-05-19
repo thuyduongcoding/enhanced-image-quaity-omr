@@ -2,7 +2,6 @@ from lyrics_remove import remove_lyrics
 from process_input_image import enhance_image
 import os
 import cv2 as cv
-import glob
 
 input_dir = 'test_image'
 remove_lyrics_dir = 'remove_lyrics_image'
